@@ -64,7 +64,7 @@
 
   /****************************    Motor maxthrottle    *******************************/
     /* this is the maximum value for the ESCs at full power, this value can be increased up to 2000 */
-    #define MAXTHROTTLE 1850
+    #define MAXTHROTTLE 2000
 
   /****************************    Mincommand          *******************************/
     /* this is the value for the ESCs when they are not armed
@@ -133,7 +133,7 @@
       //#define GY_85           // Chinese 9 DOF with  ITG3205 ADXL345 HMC5883L LLC
       //#define GY_86           // Chinese 10 DOF with  MPU6050 HMC5883L MS5611, LLC
       //#define GY_88 // Chinese 10 DOF with MPU6050 HMC5883L BMP085, LLC
-      //#define GY_521          // Chinese 6  DOF with  MPU6050, LLC
+      #define GY_521          // Chinese 6  DOF with  MPU6050, LLC
       //#define INNOVWORKS_10DOF // with ITG3200, BMA180, HMC5883, BMP085 available here http://www.diymulticopter.com
       //#define INNOVWORKS_6DOF // with ITG3200, BMA180 available here http://www.diymulticopter.com
       //#define MultiWiiMega    // MEGA + MPU6050+HMC5883L+MS5611 available here http://www.diymulticopter.com
@@ -167,14 +167,14 @@
       //#define ITG3050
       //#define ITG3200
       //#define MPU3050
-      #define L3G4200D
+     //#define L3G4200D
       //#define MPU6050       //combo + ACC 
       //#define MPU9250       //combo + ACC + MAG
       //#define LSM330        //combo + ACC
       
       /* I2C accelerometer */
       //#define MMA7455
-      #define ADXL345
+      //#define ADXL345
       //#define BMA020
       //#define BMA180
       //#define BMA280
@@ -183,19 +183,26 @@
       //#define MMA8451Q
 
       /* I2C barometer */
-      #define BMP085
-      //#define BMP280
+      //#define BMP085
+      #define BMP280
       //#define MS561101BA
       
 
       /* I2C magnetometer */
       //#define HMC5843
+      // GY-511, LSM303DLHC
       //#define HMC5883
       //#define QMC5883
-      #define MMC5883
+      //#define MMC5883
       //#define AK8975
       //#define AK8963
       //#define MAG3110
+
+      // ADDED START
+      #define LSM303DLHC_MAG
+      // Note - we use accelerometer from gyro instead
+      //#define LSM303DLHC_ACC
+      // ADDED END
 
       /* Sonar */ // for visualization purpose currently - no control code behind
       //#define SRF02 // use the Devantech SRF i2c sensors
@@ -207,9 +214,9 @@
       //#define ADCACC
 
       /* enforce your individual sensor orientation - even overrides board specific defaults */
-      #define FORCE_ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  =  -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  = Z;}
-      #define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = Y; imu.gyroADC[PITCH] =  -X; imu.gyroADC[YAW] = -Z;}
-      #define FORCE_MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = Z;}
+     // #define FORCE_ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  =  -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  = Z;}
+     // #define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] = Y; imu.gyroADC[PITCH] =  -X; imu.gyroADC[YAW] = -Z;}
+     // #define FORCE_MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = Z;}
 
       /* Board orientation shift */
       /* If you have frame designed only for + mode and you cannot rotate FC phisycally for flying in X mode (or vice versa)
@@ -672,7 +679,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
        in NMEA mode the GPS must be configured to output GGA and RMC NMEA sentences (which is generally the default conf for most GPS devices)
        at least 5Hz update rate. uncomment the first line to select the GPS serial port of the arduino */
        
-    #define GPS_SERIAL 2         // should be 2 for flyduino v2. It's the serial port number on arduino MEGA
+  //  #define GPS_SERIAL 2         // should be 2 for flyduino v2. It's the serial port number on arduino MEGA
                                    // must be 0 for PRO_MINI (ex GPS_PRO_MINI)
                                    // note: Now a GPS can share MSP on the same port. The only constrain is to not use it simultaneously, and use the same port speed.
 

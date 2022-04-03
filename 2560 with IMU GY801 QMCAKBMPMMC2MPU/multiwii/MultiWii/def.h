@@ -1648,7 +1648,7 @@
   #define ACC 0
 #endif
 
-#if defined(QMC5883) || defined(MMC5883) || defined(HMC5883) || defined(HMC5843) || defined(AK8975) || defined(MAG3110) || defined(AK8963) || defined(MPU9250)
+#if defined(QMC5883) || defined(MMC5883) || defined(HMC5883) || defined(HMC5843) || defined(AK8975) || defined(MAG3110) || defined(AK8963) || defined(MPU9250) || defined(LSM303DLHC_MAG)
   #define MAG 1
 #else
   #define MAG 0
@@ -1999,5 +1999,16 @@
     defined( ITG3200_LPF_20HZ)  || defined( ITG3200_LPF_10HZ)
   #error "you use one feature that is no longer supported or has undergone a name change"
 #endif
+
+// ADDED START
+#if defined(AdverMega_v2)
+  //#define LSM303DLHC_ACC
+  #define LSM303DLHC_MAG
+  #define ACC_ORIENTATION(X, Y, Z)  {imu.accADC[ROLL]  = -X; imu.accADC[PITCH]  = -Y; imu.accADC[YAW]  =  Z;}
+  #define GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[ROLL] =  Y; imu.gyroADC[PITCH] = -X; imu.gyroADC[YAW] = -Z;}
+  #define MAG_ORIENTATION(X, Y, Z)  {imu.magADC[ROLL]  =  X; imu.magADC[PITCH]  =  Y; imu.magADC[YAW]  = -Z;}
+  //#undef INTERNAL_I2C_PULLUPS
+#endif
+// ADDED END
 
 #endif /* DEF_H_ */
